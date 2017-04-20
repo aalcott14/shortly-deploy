@@ -36,8 +36,13 @@ module.exports = function(grunt) {
     eslint: {
       target: [
         // Add list of files to lint here
-        './**/*.js'
-      ]
+        './client/*.js',
+        './app/*.js',
+        'server.js', 'server-config.js'
+      ],
+      // options: {
+      //   ignoreWarnings: true
+      // }
     },
 
     cssmin: {
