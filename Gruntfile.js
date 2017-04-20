@@ -26,9 +26,9 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      target: {
+      dist: {
         files: {
-          'public/dist/<%= pkg.name %>.min.js': ['client/**/*.js']
+          'public/dist/<%= pkg.name %>.min.js': ['public/client/**/*.js']
         }
       }
     },
@@ -68,7 +68,6 @@ module.exports = function(grunt) {
       }
     },
   });
-
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
