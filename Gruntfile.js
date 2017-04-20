@@ -36,6 +36,7 @@ module.exports = function(grunt) {
     eslint: {
       target: [
         // Add list of files to lint here
+        './**/*.js'
       ]
     },
 
@@ -65,6 +66,9 @@ module.exports = function(grunt) {
       },
       prodServer: { ///push to server
         command: "git push live master"
+      },
+      MSG: {
+        command: "echo pinga"
       }
     },
   });
@@ -85,26 +89,20 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('push', ['shell']);
+  grunt.registerTask('push', ['shell:commit','shell:prodServer']);
 
   grunt.registerTask('test', [
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [ 'concat', 'uglify']);
+  grunt.registerTask('build', [ 'eslint', 'test', 'concat', 'uglify']);
 
-  grunt.registerTask('upload', function(n) {
+  grunt.registerTask('deploy', function(n) {
     if (grunt.option('prod')) {
       // add your production server task here
       grunt.task.run(['build', 'push']);
     } else {
-      grunt.task.run([ 'server-dev' ]);
+      grunt.task.run([ 'build', 'server-dev' ]);
     }
   });
-
-  grunt.registerTask('deploy', [
-    
-  ]);
-
-
 };
